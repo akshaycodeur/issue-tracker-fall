@@ -3,16 +3,6 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import {
-  HomeIcon,
-  CheckboxIcon,
-  PlusIcon,
-  CalendarIcon,
-  BarChartIcon,
-  FileIcon,
-  GroupIcon,
-  ArchiveIcon,
-} from "@radix-ui/react-icons"; // Ensure these icons exist in the package
-import {
   CalendarDays,
   ChartBarIcon,
   File,
@@ -25,6 +15,7 @@ import {
   TagsIcon,
   Users2Icon,
 } from "lucide-react";
+import { usePathname } from "next/navigation";
 
 const Navbar: React.FC = () => {
   const [isCalendarVisible, setIsCalendarVisible] = useState(false);
@@ -33,6 +24,8 @@ const Navbar: React.FC = () => {
     setIsCalendarVisible(!isCalendarVisible);
   };
 
+  const currentPath = usePathname();
+  console.log(currentPath);
   return (
     <aside className="w-full h-screen bg-gray-900 text-white">
       <nav className="p-4">
@@ -56,7 +49,7 @@ const Navbar: React.FC = () => {
         <div className="mb-2">
           <div className="flex items-center p-2 hover:bg-gray-800 rounded-md">
             <TagsIcon className="mr-2 text-sky-500 w-5" />
-            <span>Tickets</span>
+            <span>Issues</span>
           </div>
           <ul className="pl-6">
             <li className="mb-1">

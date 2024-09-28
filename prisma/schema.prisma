@@ -12,3 +12,33 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
+
+model Issue {
+  id          Int       @id @default(autoincrement()) // Unique ID for each issue
+  title       String    @db.VarChar(255) // Title of the issue
+  description String?   @db.Text // Detailed description of the issue
+  priority    Priority  @default(MEDIUM) // Priority of the issue (Low, Medium, High)
+  status      Status    @default(OPEN) // Current status of the issue (Open, Closed, In Progress)
+  createdAt   DateTime  @default(now()) // Timestamp for when the issue was created
+  updatedAt   DateTime  @updatedAt // Automatically updates when the issue is modified
+  startDate   DateTime?
+  endDate     DateTime?
+  //user        User     @relation(fields: [userId], references: [id])  // User who created or is assigned to the issue
+  userId      Int
+
+  // Other fields as necessary
+}
+
+// Enum to handle the status of the issue
+enum Status {
+  OPEN
+  CLOSED
+  IN_PROGRESS
+}
+
+// Enum to handle priority of the issue
+enum Priority {
+  LOW
+  MEDIUM
+  HIGH
+}
